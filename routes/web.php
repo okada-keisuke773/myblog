@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('news/create', 'Admin\NewsController@add');
+});
+
+//Work
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('work/create', 'Admin\WorkController@add');
+    Route::get('work/edit', 'Admin\WorkController@edit');
+});
