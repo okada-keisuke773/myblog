@@ -16,15 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+//News
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+     Route::get('news/create', 'Admin\NewsController@add');
+     Route::post('news/create', 'Admin\NewsController@create');
 });
 
 //Work
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('work/create', 'Admin\WorkController@add')->middleware('auth');
-    Route::get('work/edit', 'Admin\WorkController@edit')->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::get('work/create', 'Admin\WorkController@add');
+    Route::post('work/create', 'Admin\WorkController@create');
+    Route::get('work/edit', 'Admin\WorkController@edit');
+    Route::post('work/edit', 'Admin\WorkController@update');
 });
 
 Auth::routes();
