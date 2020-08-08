@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>第3章 - Laravel実践 - 第6部 - viewとコントローラ (復習)</title>
-   <style>
-       body {
-        font-size: 16pt; 
-        color: #999;
-       }
-       h1 {
-        font-size: 100pt;
-        color: #eee;
-       }
-   </style>
-</head>
-<body>
-    <h1>Work create</h1>
-</body>
-</html>
+@extends('layouts.work')
+
+@section('title', '職務経歴')
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h2>職務経歴作成画面</h2>
+    </div>
+  </div>
+</div>
+@endsection
