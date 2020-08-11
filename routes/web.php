@@ -29,8 +29,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get('work/edit', 'Admin\WorkController@edit');
     Route::post('work/edit', 'Admin\WorkController@update');
     Route::get('work', 'Admin\WorkController@index');
-    Route::get('work/edit', 'Admin\WorkController@edit'); // 追記
-    Route::post('work/edit', 'Admin\WorkController@update'); // 追記
 });
 
 Auth::routes();

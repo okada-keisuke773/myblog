@@ -43,14 +43,14 @@ class WorkController extends Controller
         }
         return view('admin.work.index', ['posts' => $posts, 'cond_name' => $cond_name]);
     }
-     public function edit(){
+     public function edit(Request $request){
         $work = Works::find($request->id);
       if (empty($work)) {
         abort(404);    
       }
         return view('admin.work.edit', ['work_form' => $work]);
     }
-     public function updete(){
+     public function update(Request $request){
         $this->validate($request, Works::$rules);
       // News Modelからデータを取得する
       $work = Works::find($request->id);
