@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Work;
+use App\Works;
 
 class WorkController extends Controller
 {
@@ -13,8 +13,8 @@ class WorkController extends Controller
     }
     public function create(Request $request){
 
-        $this->validate($request, Work::$rules);
-        $work = new Work;
+        $this->validate($request, Works::$rules);
+        $work = new Works;
         $form = $request->all();
 
         if (isset($form['file'])) {
@@ -27,17 +27,48 @@ class WorkController extends Controller
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
         // フォームから送信されてきたimageを削除する
-        unset($form['image']);
+        unset($form['file']);
 
         $work->fill($form);
         $work->save();
 
-        return redirect('admin/work/create');
+        return redirect('admin/work/');
+    }
+    public function index(Request $request){
+        $cond_name = $request->cond_name;
+        if ($cond_name != '') {
+            $posts = Works::where('name', $cond_name)->get();
+        }else{
+            $posts = Works::all();
+        }
+        return view('admin.work.index', ['posts' => $posts, 'cond_name' => $cond_name]);
     }
      public function edit(){
-        return view('admin.work.edit');
+        $work = Works::find($request->id);
+      if (empty($work)) {
+        abort(404);    
+      }
+        return view('admin.work.edit', ['work_form' => $work]);
     }
      public function updete(){
-        return redirect('admin/work/edit');
+        $this->validate($request, Works::$rules);
+      // News Modelからデータを取得する
+      $work = Works::find($request->id);
+      // 送信されてきたフォームデータを格納する
+      $work_form = $request->all();
+      // 該当するデータを上書きして保存する
+      $work->fill($work_form)->save();
+      if (isset($work_form['file'])) {
+        $path = $request->file('file')->store('test');
+        $work->file = basename($path);
+        unset($work_form['file']);
+      } elseif (0 == strcmp($request->remove, 'true')) {
+        $work->file = null;
+      }
+      unset($work_form['_token']);
+      unset($work_form['remove']);
+
+      $work->fill($work_form)->save();
+        return redirect('admin/work/');
     }
 }
