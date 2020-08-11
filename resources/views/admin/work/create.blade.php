@@ -15,14 +15,25 @@
                         @endforeach
                     </ul>
                 @endif
-                職歴・会社名
-                <input type="text" name="name" value="{{ old('name')}}">
-                <br>
-               <p>詳細</p>
-                <textarea class="form-control" name="description" rows="20">{{ old('description') }}</textarea>
-                <br>
-                <input type="file" name="file">
-                <button type="submit">アップロード</button>
+                <div class="form-group row">
+                    <label class="col-md-2" for="title">職歴・会社名</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    </div>
+                </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="body">詳細</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="description" rows="20">{{ old('description') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="file">ファイル</label>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control-file" name="image">
+                            <button type="submit">アップロード</button>
+                        </div>
+                    </div>
                 {{ csrf_field()}}
                 <br>
                 <br>
