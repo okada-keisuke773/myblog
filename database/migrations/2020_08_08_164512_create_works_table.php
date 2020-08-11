@@ -16,7 +16,8 @@ class CreateWorksTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('file_path')->nullable();
+            $table->string('description');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

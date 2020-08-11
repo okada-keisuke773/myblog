@@ -148,7 +148,8 @@ return [
 
     'attributes' => [
         'title' => 'タイトル',
-        'body' => '本文'
+        'body' => '本文',
+        'name' => '職歴・会社名'
     ],
 
 ];
