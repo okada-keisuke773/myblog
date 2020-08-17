@@ -49,6 +49,9 @@
                                         <div>
                                             <a href="{{ action('Admin\WorkController@edit', ['id' => $work->id]) }}">編集</a>
                                         </div>
+                                        <div>
+                                            <a href="{{ action('Admin\WorkController@delete', ['id' => $work->id]) }}">削除</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

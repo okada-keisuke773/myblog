@@ -68,6 +68,7 @@ class WorkController extends Controller
         $work->file = null;
       }
       unset($work_form['_token']);
+      unset($work_form['file']);
       unset($work_form['remove']);
       $work->fill($work_form)->save();
 
@@ -76,5 +77,10 @@ class WorkController extends Controller
       $histories->edited_at = Carbon::now();
       $histories->save();
         return redirect('admin/work/');
+    }
+    public function delete(Request $request){
+      $work = Works::find($request->id);
+      $work->delete();
+      return redirect('admin/work/');
     }
 }
