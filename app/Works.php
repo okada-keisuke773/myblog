@@ -12,4 +12,8 @@ class Works extends Model
         'name' => 'required',
         'description' => 'required',
     );
+
+    public function histories(){
+        return $this->hasMany('App\Work_histories');
+    }
 }

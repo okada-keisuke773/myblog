@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Works;
+use App\Work_histories;
+use Carbon\Carbon;
 
 class WorkController extends Controller
 {
@@ -67,8 +69,12 @@ class WorkController extends Controller
       }
       unset($work_form['_token']);
       unset($work_form['remove']);
-
       $work->fill($work_form)->save();
+
+      $histories = new Work_histories;
+      $histories->works_id = $work->id;
+      $histories->edited_at = Carbon::now();
+      $histories->save();
         return redirect('admin/work/');
     }
 }
